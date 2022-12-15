@@ -1,0 +1,26 @@
+section.product {
+  max-width: 1280px;
+  margin: auto;
+  margin-top: 46px;
+  .product__header {
+    h1.product__title {
+      @include styleText($fs-4, $fw-2, $color-white);
+      margin-bottom: 89px;
+      background: linear-gradient(180deg, #f21299 0%, #1b02b5 100%);
+      padding: 0px 250px 0px 20px;
+    }
+  }
+  .product__content {
+    padding: 0 32px;
+    .product__grid {
+      gap: 87px;
+      justify-content: center;
+    }
+  }
+}
+
+// RESET BOOSTRAP THIS GRID
+.col {
+  flex-grow: 0 !important;
+  padding: 0 !important;
+}

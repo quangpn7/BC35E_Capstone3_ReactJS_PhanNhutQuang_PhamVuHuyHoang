@@ -1,0 +1,52 @@
+tbody .cart-addRemove {
+  width: 36px;
+  height: 32px;
+  padding: 6px 6px 6px 8px;
+  background: #6200ee;
+  box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.14), 0px 3px 14px rgba(0, 0, 0, 0.12),
+    0px 5px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  border: none;
+  color: white;
+  text-align: center;
+}
+
+.cartQuantity-text {
+  background: #d9d9d9;
+  padding: 1px 27px;
+}
+.buttons {
+  text-align: center;
+}
+
+.cart_action-btn {
+  
+  padding: 10px 25px;
+  color: white;
+  text-align: center;
+  border: none;
+  border-radius: 4px;
+}
+
+.cart-btnEdit {
+  background: #6200ee;
+  box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.14), 0px 3px 14px rgba(0, 0, 0, 0.12),
+    0px 5px 5px rgba(0, 0, 0, 0.2);
+}
+.cart-btnDelete {
+  background: #eb5757;
+  box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.14), 0px 3px 14px rgba(0, 0, 0, 0.12),
+    0px 5px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.btn-cartSubmit {
+  background: #f2994a;
+  box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.14), 0px 3px 14px rgba(0, 0, 0, 0.12),
+    0px 5px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  border:none;
+  padding: 10px 35px;
+  text-align: right;
+  color: white;
+}

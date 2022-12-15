@@ -1,0 +1,41 @@
+section.login {
+  margin-top: 60px;
+  .login__wrap {
+    h1 {
+      @include styleText($fs-4, $fw-2, $color-black);
+    }
+    .login__form {
+      form {
+        margin-top: 27px;
+        label {
+          @include styleText(18px, $fw-3, rgba(0, 0, 0, 0.6));
+          margin-bottom: 5px !important;
+        }
+        input {
+          width: 433px;
+          padding: 16px;
+          border: none;
+          background-color: rgba(33, 33, 33, 0.08);
+        }
+        span {
+          @include styleText("", $fw-2, $color-red);
+          font-size: 12px !important;
+        }
+        span#emailError {
+          margin: 5px 0 18px 0;
+        }
+        span#passError {
+          margin: 5px 0 0 0;
+        }
+        .login__option {
+          margin-top: 40px;
+          margin-bottom: 20px;
+          a {
+            @include styleText(18, $fw-3, #152aeb);
+            padding: 0 !important;
+          }
+        }
+      }
+    }
+  }
+}

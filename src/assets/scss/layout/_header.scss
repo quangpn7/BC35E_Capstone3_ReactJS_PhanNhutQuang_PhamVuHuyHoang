@@ -1,0 +1,30 @@
+header {
+  width: 100%;
+  background-color: $color-black;
+
+  .header__wrap {
+    max-width: 1280px;
+    margin: auto;
+    padding: 0 24px;
+    .header__content {
+      .header__feature {
+        i {
+          font-size: $fs-3;
+          line-height: 1.5;
+          @include styleText($fs-4, $fw-1, $color-white);
+        }
+        span#item_count {
+          @include styleText($fs-3, $fw-1, $color-white);
+        }
+        span {
+          display: inline-block;
+          padding: 0 10px;
+          a {
+            @include styleText($fs-1, $fw-1, $color-text-gray);
+            opacity: 0.8;
+          }
+        }
+      }
+    }
+  }
+}

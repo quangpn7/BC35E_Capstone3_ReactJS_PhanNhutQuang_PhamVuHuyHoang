@@ -1,0 +1,76 @@
+.product__item {
+  background-color: $color-light-gray;
+  width: 334px;
+  position: relative; //for heart icon
+  transition: all 0.2s linear;
+  &:hover {
+    transform: scale(1.1);
+  }
+  .product__like-icon {
+    position: absolute;
+    right: 20px;
+    top: 25px;
+    i {
+      @include styleText($fs-4, $fw-2, $color-red);
+      cursor: pointer;
+    }
+  }
+}
+.item-upper {
+  img {
+    display: block;
+    padding: 45px 57px 30px 57px;
+  }
+  .item-text {
+    padding-left: 23px;
+    padding-right: 23px;
+
+    p {
+      @include styleText($fs-3, $fw-1, $color-black);
+      margin-bottom: 8px !important;
+    }
+    span {
+      display: block;
+      @include styleText($fs-2, $fw-1, $color-gray-description);
+      margin-bottom: 20px !important;
+    }
+  }
+}
+.item-bottom {
+}
+
+.product__item.card {
+  .card-header {
+    background-color: $color-light-gray;
+    border-bottom: none;
+    padding: 60px 60px 10px 60px !important;
+    .card-icon {
+      top: 30px;
+      right: 26px;
+      i {
+        @include styleText($fs-4, $fw-2, $color-red);
+        cursor: pointer;
+      }
+    }
+  }
+  .card-body {
+    .card-body-upper {
+      h3 {
+        @include styleText($fs-3, $fw-1, $color-black);
+      }
+      p {
+        @include styleText($fs-2, $fw-1, $color-gray-description);
+      }
+    }
+    .card-body-under {
+      .price-wrap {
+        background-color: $color-gray;
+        padding: 17px 34px !important;
+        p {
+          @include styleText($fs-3, bold, $color-black);
+          padding-right: 10px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  // user-drag: none;
+}
+// body {
+//   overflow: hidden;
+// }
+a {
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+button:focus {
+  box-shadow: none !important;
+}

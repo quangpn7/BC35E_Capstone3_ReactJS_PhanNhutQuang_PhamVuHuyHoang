@@ -1,0 +1,40 @@
+footer {
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+
+  .footer__wrap {
+    max-width: 1280px;
+
+    .container {
+      padding-bottom: 26px;
+      width: 90% !important;
+      .footer__help,
+      .footer__support {
+        border-right: 1px solid $color-footer-gray;
+      }
+      .footer__support,
+      .footer__register {
+        padding-left: 60px;
+      }
+      .footer__link {
+        h3 {
+          @include styleText($fs-2, 700, $color-black);
+          margin-bottom: 15px;
+        }
+        li {
+          margin: 10px 0;
+          a {
+            @include styleText($fs-1, bold, $color-black);
+            &:hover {
+              color: $color-orange-light;
+            }
+          }
+        }
+      }
+    }
+  }
+  .footer__credit {
+    background-color: $color-footer-credit;
+  }
+}

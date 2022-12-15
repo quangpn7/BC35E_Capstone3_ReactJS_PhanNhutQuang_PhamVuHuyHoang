@@ -1,0 +1,102 @@
+.btn-carousel {
+  padding: 13px 35px !important;
+  border-radius: 0 !important;
+  background-color: $color-yellow !important;
+  border: none;
+  @include styleText($fs-3, $fw-1, $color-white);
+  transition: all 0.3s linear;
+  &:hover {
+    background-color: $color-yellow-darker !important;
+    color: $color-black;
+  }
+}
+.btn-buy {
+  padding: 17px 34px !important;
+  border-radius: 0 !important;
+  background-color: $color-green-btn !important;
+  border: none;
+  @include styleText($fs-3, $fw-1, $color-black);
+  transition: all 0.3s linear;
+  &:hover {
+    background-color: $color-green !important;
+    color: $color-white;
+  }
+}
+
+.btn-pressed {
+  background-color: $color-yellow-darker !important;
+  color: $color-white !important;
+  transform: scale(1.1);
+}
+
+.size__button {
+  padding: 10px 13px !important;
+  border-radius: 0 !important;
+  margin-right: 20px;
+  background-color: $color-gray-btn;
+  border: none;
+  @include styleText($fs-3, $fw-3, $color-black);
+}
+
+.btn-addRemove {
+  @extend .size__button;
+  line-height: 1;
+  padding: 18px 22px !important;
+  background: linear-gradient(180deg, #6181f3 0%, #7c97f5 99.48%) !important;
+  color: $color-white;
+  margin: 0 !important;
+}
+
+.btn-addToCart {
+  display: block;
+  margin-top: 7px;
+  @include styleText($fs-3, $fw-3, $color-white);
+  background: linear-gradient(
+    270deg,
+    rgba(62, 32, 248, 0.9) 5.14%,
+    #d017ee 89.71%
+  );
+}
+
+.btn-submit {
+  padding: 6px 90px !important;
+  margin-top: 80px;
+
+  background-color: $color-purple;
+  @include styleText($fs-2, $fw-1, $color-white);
+}
+
+.search__btn {
+  margin-left: 37px;
+  padding: 16px 32px;
+  border: none;
+  border-radius: 50px;
+  background-color: $color-purple-btn;
+  color: $color-white;
+}
+
+.btn-login {
+  @extend .search__btn;
+  margin-left: 0 !important;
+}
+.btn-login-fb {
+  background: #1877f2;
+  border: none;
+  padding: 20px 20px 20px 40px;
+  border-radius: 21px;
+  @include styleText($fs-2, $fw-2, $color-white);
+  img {
+    margin: auto;
+
+    top: 0;
+    left: 25px;
+    bottom: 0;
+  }
+}
+
+.update-btn {
+  @extend .search__btn;
+  // padding: 10px 20px !important;
+
+  margin-left: 30px !important;
+}
