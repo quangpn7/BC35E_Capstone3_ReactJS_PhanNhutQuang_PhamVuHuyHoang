@@ -7,3 +7,5 @@
 + **Design**: Trương Tấn Khải
 + **API**: CyberSoft
 ---
+### App canvas:
+<img src="./capstone3Comp.excalidraw.png">
