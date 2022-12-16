@@ -1,108 +1,50 @@
-//PRODUCT DETAIL
-section.product {
-  .product__wrap {
-    overflow: hidden;
-    width: 100%;
-    max-width: 1280px;
-    margin: auto;
-    .product__left {
-      .product__frame {
-        padding: 50px 50px 0 50px;
-        background-color: $color-light-gray;
-      }
-    }
-    .product__right {
-      .product__info {
-        h1 {
-          @include styleText($fs-3, $fw-1, $color-black);
-        }
-        p {
-          width: 80%;
-          line-height: 19.3px;
-          @include styleText($fs-1, $fw-2, $color-black);
-        }
-      }
-      //PRODUCT SIZE
-      .product__size {
-        span.product__sizeStatus {
-          display: block;
-          margin-bottom: 16px;
-          @include styleText($fs-3, $fw-3, $color-green);
-        }
-      }
-      //PRODUCT PRICE AND SELECTION
-      .product__price {
-        margin-top: 17px;
-        span.product__price {
-          display: block;
-          @include styleText($fs-3, $fw-3, $color-red);
-          margin-bottom: 17px;
-        }
-        .product__addRemove {
-          span.product__buyCount {
-            @include styleText($fs-3, $fw-2, $color-black);
-            margin: 0 25px;
-          }
-          input {
-            text-align: center;
-            width: 60px;
-            border: none;
-            @include styleText($fs-3, $fw-2, $color-black);
-            &:focus {
-              outline: none;
-            }
-          }
-        }
-      }
-    }
-  }
-}
+.detail-text { 
 
-// FOOTER
-footer {
-  margin-top: 106px;
+  .size-list .d-inline-block .size-num{ 
+      width: 50px;
+      height: 50px;
+      background: #CCCCCC;
+      font-size: 24px;
+      padding: 10px;
+      margin: 5px;
+      color: black;
+  }
 
-  .footer__wrap {
-    overflow: hidden;
+  span { 
+      font-size: 25px;
+      font-weight: 400;
   }
-  .footer__row-1,
-  .footer__row-2 {
-    background-color: $color-light-green;
-    width: 100vw;
-    .footer__row {
-      width: 100%;
-      margin: auto;
-      padding: 25px 150px;
-      .footer__block {
-        border-right: 1px solid $color-gray;
-        h4 {
-          @include styleText(18px, $fw-3, $color-black);
-        }
-        li {
-          padding: 2px 0;
-        }
-        a {
-          @include styleText(12px, $fw-2, $color-black);
-          &:hover {
-            color: $color-gray;
-          }
-        }
-        a.footer__redirectLink {
-          color: $color-orange-light;
-          &:hover {
-            color: #a56966;
-          }
-        }
-        p {
-          @include styleText(12px, $fw-2, $color-black);
-        }
+
+  .price { 
+      font-size: 30px;
+      font-weight: 600;
+      line-height: 36px;
+  }
+
+  .counter {
+      width: 15%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .btn-size {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background-color: #d9d9d9;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 20px;
+          font-weight: 900;
+          color: #202020;
+          cursor: pointer;
       }
-      .footer__block:nth-child(3) {
-        border: none;
+      .count {
+          font-size: 20px;
+          font-weight: 900;
+          color: #202020;
       }
-    }
   }
-  .footer__row-2 {
-    background-color: $color-footer-gray !important;
-  }
+
 }

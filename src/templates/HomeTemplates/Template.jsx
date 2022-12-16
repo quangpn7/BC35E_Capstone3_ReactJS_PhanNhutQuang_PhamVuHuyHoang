@@ -38,7 +38,7 @@ const Template = () => {
                 className="nav-link"
                 href="#"
                 id="btnHome"
-                onclick="getDataProduct()"
+             
               >
                 Home
               </a>
@@ -49,7 +49,7 @@ const Template = () => {
                 href="#"
                 id="btnMen"
                 value="men"
-                onclick="renderCategory('men')"
+                
               >
                 Men
               </a>
@@ -60,7 +60,7 @@ const Template = () => {
                 href="#"
                 id="btnWoman"
                 value="women"
-                onclick="renderCategory('women')"
+               
               >
                 Woman
               </a>
