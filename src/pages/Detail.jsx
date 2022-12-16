@@ -1,31 +1,29 @@
 import React from "react";
 import ShoesCard from "../components/shoesCard/ShoesCard";
-import {useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 import { useEffect } from "react";
 import { getProductDetailAction } from "../redux/reducer/productReducer";
 const Detail = () => {
-
-  const {productDetail} = useSelector(state => state.productReducer)
+  const { productDetail } = useSelector((state) => state.productReducer);
   const params = useParams();
   const dispatch = useDispatch();
 
-  const getproductById = async ()=> {
-    const result = await axios ({
+  const getproductById = async () => {
+    const result = await axios({
       url: `https://shop.cyberlearn.vn/api/Product/getbyid?id=${params.id}`,
       method: "GET",
-    })
+    });
 
-    console.log('data', result.data.content)
+    console.log("data", result.data.content);
     const action = getProductDetailAction(result.data.content);
     dispatch(action);
-  }
+  };
 
-  useEffect (()=>{
+  useEffect(() => {
     getproductById();
-  }, [params.id])
-
+  }, [params.id]);
 
   return (
     <div className="container">
@@ -36,21 +34,16 @@ const Detail = () => {
         <div className="col-6">
           <div className="detail-text ">
             <h3 className="py-2">{productDetail?.name}</h3>
-            <p className="py-2">
-              {productDetail?.description}
-            </p>
+            <p className="py-2">{productDetail?.description}</p>
             <span className="py-2 text-success">available size</span>
             <ul className="py-3 size-list">
-              {productDetail?.size?.map((size, index) => { 
-                return ( 
-                  <li key={index} className='d-inline-block'>
-                    <a className="size-num">
-                    {size}
-                    </a>   
+              {productDetail?.size?.map((size, index) => {
+                return (
+                  <li key={index} className="d-inline-block">
+                    <a className="size-num">{size}</a>
                   </li>
-                )
+                );
               })}
-             
             </ul>
             <a className="text-danger py-2 price" href="#">
               {productDetail?.price} $
@@ -68,14 +61,13 @@ const Detail = () => {
       <div className="my-5">
         <h2 className="text-center">Realated Product</h2>
         <div className="row mt-5">
-          {productDetail?.relatedProducts?.map((item,index) => { 
+          {productDetail?.relatedProducts?.map((item, index) => {
             return (
               <div className="col-4" key={index}>
-                <ShoesCard item={item}/>
+                <ShoesCard item={item} />
               </div>
-            )
+            );
           })}
-          
         </div>
       </div>
     </div>
