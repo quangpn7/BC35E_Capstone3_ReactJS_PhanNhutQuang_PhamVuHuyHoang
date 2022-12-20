@@ -1,5 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Template = () => {
   return (
@@ -8,22 +9,26 @@ const Template = () => {
         <div className="header__wrap">
           <div className="header__content d-flex justify-content-between align-items-center">
             <div className="header__logo">
-              <a href="#">
+              <NavLink to="">
                 <img src="./img/image 3.png" alt="logoCybersoft" />
-              </a>
+              </NavLink>
             </div>
             <div className="header__feature d-flex align-items-center">
-              <i className="fa fa-shopping-cart" />
+              <NavLink to='/carts'>
+              <i className="fa fa-shopping-cart" style={{cursor:"pointer", fontSize:"10px !important"}}/>
               <span id="item_count">(0)</span>
+
+              </NavLink>
+             
               <span>
-                <a href="#" id="btnLogin">
+                <NavLink to="/login" id="btnLogin">
                   Login
-                </a>
+                </NavLink>
               </span>
               <span>
-                <a href="./register.html" id="btnRegister">
+                <NavLink to="./register.html" id="btnRegister">
                   Register
-                </a>
+                </NavLink>
               </span>
             </div>
           </div>
@@ -34,51 +39,55 @@ const Template = () => {
         <div className="navigation__wrap">
           <ul className="nav">
             <li className="nav-item active">
-              <a
+              <NavLink
                 className="nav-link"
-                href="#"
+                to="/home"
                 id="btnHome"
              
               >
                 Home
-              </a>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <a
+              <NavLink
                 className="nav-link"
-                href="#"
+                to="#"
                 id="btnMen"
                 value="men"
                 
               >
                 Men
-              </a>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <a
+              <NavLink
                 className="nav-link"
-                href="#"
+                to="#"
                 id="btnWoman"
                 value="women"
                
               >
                 Woman
-              </a>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#" id="btnKid">
+              <NavLink className="nav-link" to="#" id="btnKid">
                 Kid
-              </a>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#" id="btnSport">
+              <NavLink className="nav-link" to="#" id="btnSport">
                 Sport
-              </a>
+              </NavLink>
             </li>
           </ul>
         </div>
       </section>
       <Outlet />
+      
+      
+      
+      
       <footer>
         <div className="footer__wrap mx-auto">
           <div className="row container mx-auto">
@@ -86,16 +95,16 @@ const Template = () => {
               <h3>GET HELP</h3>
               <ul className="list-unstyled">
                 <li>
-                  <a href="#">Home</a>
+                  <NavLink to="#">Home</NavLink>
                 </li>
                 <li>
-                  <a href="#">Nike</a>
+                  <NavLink to="#">Nike</NavLink>
                 </li>
                 <li>
-                  <a href="#">Adidas</a>
+                  <NavLink to="#">Adidas</NavLink>
                 </li>
                 <li>
-                  <a href="#">Contact</a>
+                  <NavLink to="#">Contact</NavLink>
                 </li>
               </ul>
             </div>
@@ -103,16 +112,16 @@ const Template = () => {
               <h3>SUPPORT</h3>
               <ul className="list-unstyled">
                 <li>
-                  <a href="#">About</a>
+                  <NavLink to="#">About</NavLink>
                 </li>
                 <li>
-                  <a href="#">Contact</a>
+                  <NavLink to="#">Contact</NavLink>
                 </li>
                 <li>
-                  <a href="#">Help</a>
+                  <NavLink to="#">Help</NavLink>
                 </li>
                 <li>
-                  <a href="#">Phone</a>
+                  <NavLink to="#">Phone</NavLink>
                 </li>
               </ul>
             </div>
@@ -120,10 +129,10 @@ const Template = () => {
               <h3>REGISTER</h3>
               <ul className="list-unstyled">
                 <li>
-                  <a href="#">Register</a>
+                  <NavLink to="#">Register</NavLink>
                 </li>
                 <li>
-                  <a href="#">Login</a>
+                  <NavLink to="#">Login</NavLink>
                 </li>
               </ul>
             </div>
