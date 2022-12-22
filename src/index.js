@@ -27,7 +27,7 @@ root.render(
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/carts" element={<Carts />} />
+          <Route path="carts" element={<Carts />}></Route>
           <Route path="*" element={<Navigate to="" />} />
         </Route>
       </Routes>
