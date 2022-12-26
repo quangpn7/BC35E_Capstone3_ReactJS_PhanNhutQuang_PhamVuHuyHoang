@@ -37,7 +37,7 @@ const Home = () => {
   return (
     <div>
       <Carousel afterChange={onChange}>
-        {arrProduct.slice(0, 4).map((item, index) => {
+        {arrProduct?.slice(0, 4).map((item, index) => {
           return (
             <div key={index}>
               <div style={contentStyle} className="d-flex">

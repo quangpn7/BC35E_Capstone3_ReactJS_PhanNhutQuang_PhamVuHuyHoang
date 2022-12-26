@@ -16,7 +16,15 @@ const initialState = {
     price: 1000,
     image: "https://picsum.photos/id/1/200/200",
   },
-  spGioHang: [],
+  spGioHang: [
+    {
+      id: 1,
+      name: "nikeAir",
+      image: "https://picsum.photos/id/1/200/200",
+      price: 5000,
+      quantity: 5, 
+    },
+  ],
 };
 
 const productReducer = createSlice({
@@ -30,13 +38,14 @@ const productReducer = createSlice({
     getProductDetailAction: (state, action) => {
       state.productDetail = action.payload;
     },
-    spGioHangAction : (state, action) => { 
-      state.spGioHang = action.payload;
-    }
+    addGioHangAction: (state, action) => {
+      console.log('action', action)
+      state.spGioHang.push(action.payload);
+    },
   },
 });
 
-export const { getProductAction, getProductDetailAction } =
+export const { getProductAction, getProductDetailAction, addGioHangAction } =
   productReducer.actions;
 
 export default productReducer.reducer;
@@ -66,14 +75,4 @@ export const getProductByIdApi = (id) => {
   };
 };
 
-// export const addGioHang = (spClick) => { 
-//   let spAdd = {...spClick, soLuong: 1};
-//   let spGiohang = null; 
-//   let checkSp = spGiohang?.find(sp => sp.id ===spClick.id)
-//   if(checkSp) { 
-//     checkSp.soLuong +=1
-//   } else {
-//     spGiohang.push(spAdd);
-//   }
-//   const action = spGioHangAction(spGioHang)
-// }
+
