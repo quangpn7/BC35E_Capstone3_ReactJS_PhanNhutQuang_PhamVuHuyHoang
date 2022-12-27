@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import {
   getProductByIdApi,
   addGioHangAction,
+  addItemAction,
 } from "../redux/reducer/productReducer";
 import { NavLink } from "react-router-dom";
 const Detail = () => {
@@ -59,7 +60,6 @@ const Detail = () => {
               onClick={() => {
                 const itemCart = { ...productDetail, quantity: 1 };
                 const action = addGioHangAction(itemCart);
-                console.log("action123", action);
                 dispatch(action);
               }}
             >

@@ -39,13 +39,37 @@ const productReducer = createSlice({
       state.productDetail = action.payload;
     },
     addGioHangAction: (state, action) => {
-      console.log('action', action)
+      const itemCart = state.spGioHang.find(item => item.id === action.payload.id)
+      // if(itemCart) {
+      //   itemCart.quantity += 1
+      // }else { 
+      //   state.spGioHang.push(action.payload);
+      // }
       state.spGioHang.push(action.payload);
-    },
-  },
+
+      },
+      deleteItemAction: (state, action) => {
+        const id = action.payload;
+        state.spGioHang = state.spGioHang.filter(prod => prod.id !== id)
+      },
+      addItemAction : (state, action) =>{
+        const {id, quantity} = action.payload;
+        const item = state.spGioHang.find(item => item.id === id);
+        if(item) { 
+          item.quantity += quantity;
+          if(item.quantity<1) { 
+            if(window.confirm('delete item ?')) {
+              state.spGioHang = state.spGioHang.filter(item => item.id !== id);
+            } else {
+              item.quantity += quantity;
+            }
+          }
+        }
+      }
+    }
 });
 
-export const { getProductAction, getProductDetailAction, addGioHangAction } =
+export const { getProductAction, getProductDetailAction, addGioHangAction, deleteItemAction,addItemAction } =
   productReducer.actions;
 
 export default productReducer.reducer;

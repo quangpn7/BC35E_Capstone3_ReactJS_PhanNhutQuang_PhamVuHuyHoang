@@ -27,7 +27,6 @@ const Home = () => {
   useEffect(() => {
     //call API:
     getAllProduct();
-    console.log("arrProd", arrProduct);
   }, []);
 
  

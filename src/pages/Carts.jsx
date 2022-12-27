@@ -1,26 +1,17 @@
 import React from "react";
 import ProductItem from "../components/ProductItem/ProductItem";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getProductAction } from "../redux/reducer/productReducer";
-import { getProductByIdApi } from "../redux/reducer/productReducer";
+import ShoesCard from "../components/shoesCard/ShoesCard";
+import { addItemAction, deleteItemAction } from "../redux/reducer/productReducer";
+
 
 const Carts = () => {
   const {productDetail, arrProduct, spGioHang } = useSelector(
     (state) => state.productReducer
   );
 
-  const dispatch= useDispatch();
+  const dispatch = useDispatch();
 
-
-
-
-
-
- 
-
-  console.log("arrProduct", arrProduct);
-  console.log(spGioHang);
   return (
     <div className="container mt-5">
       <h2>Carts</h2>
@@ -60,16 +51,33 @@ const Carts = () => {
                   <td>{item?.name}</td>
                   <td>{item?.price}$</td>
                   <td className="text-center">
-                    <button className="cart-addRemove">+</button>
-                    <span className="mx-4 cartQuantity-text">1</span>
-                    <button className="cart-addRemove">-</button>
+                    <button className="cart-addRemove" onClick ={()=>{
+                      const itemAdd = {
+                        id: item?.id,
+                        quantity: 1
+                      }
+                      const action = addItemAction(itemAdd);
+                      dispatch(action);
+                    }}>+</button>
+                    <span className="mx-4 cartQuantity-text">{item.quantity}</span>
+                    <button className="cart-addRemove" onClick ={()=>{
+                      const itemAdd = {
+                        id: item?.id,
+                        quantity: -1
+                      }
+                      const action = addItemAction(itemAdd);
+                      dispatch(action);
+                      }}>-</button>
                   </td>
                   <td>1000</td>
                   <td className="buttons">
                     <button className="cart_action-btn cart-btnEdit mx-1">
                       Edit
                     </button>
-                    <button className="cart_action-btn mx-1 cart-btnDelete">
+                    <button className="cart_action-btn mx-1 cart-btnDelete" onClick={()=>{
+                      const action = deleteItemAction(item?.id)
+                      dispatch(action);
+                    }}>
                       Delete
                     </button>
                   </td>
@@ -87,9 +95,13 @@ const Carts = () => {
         <h2>Related Product</h2>
 
         <div className="row">
-          <div className="col-4">
-
-          </div>
+        {productDetail?.relatedProducts?.map((item, index) => {
+            return (
+              <div className="col-4" key={index}>
+                <ShoesCard item={item} />
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

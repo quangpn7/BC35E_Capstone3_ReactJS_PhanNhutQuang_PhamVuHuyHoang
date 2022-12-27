@@ -16,7 +16,7 @@ const ShoesCard = (props) => {
           boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
         }}
       >
-        <img src={item.image} className="w-100" alt="" />
+        <img src={item?.image} className="w-100" alt="" />
         <div className="card-body">
           <div className="h-50">
             <h3 className="test-wrap">{item.name}</h3>
@@ -24,7 +24,7 @@ const ShoesCard = (props) => {
 
           <div className="h-50">
             <p>
-              {item.description}
+              {item?.description}
             </p>
             <NavLink
               to={`/detail/${item?.id}`}
