@@ -12,11 +12,13 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Carts from "./pages/Carts";
 import Template from "./templates/HomeTemplates/Template";
+import Modal from "./components/HOC/Modal/Modal";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
     <BrowserRouter>
+      <Modal />
       <Routes>
         <Route path="" element={<Template />}>
           <Route index element={<Home />} />
