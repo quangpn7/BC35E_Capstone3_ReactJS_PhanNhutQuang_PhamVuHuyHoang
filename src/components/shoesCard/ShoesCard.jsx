@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const ShoesCard = (props) => {
-  const { item } = props;
+  const { item, index } = props;
 
   return (
     // <div className="card h-100">
@@ -35,7 +35,7 @@ const ShoesCard = (props) => {
     //     </div>
     //   </div>
     // </div>
-    <div className="product__item card shadow ">
+    <div className="product__item card shadow" key={index}>
       <div className="card-header position-relative">
         <div className="card-icon position-absolute">
           <i className="fa fa-heart" aria-hidden="true" />

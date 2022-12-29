@@ -51,18 +51,11 @@ const Profile = () => {
   //Dispatch declare
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    //run at mounting
-    const actionAsync = getProfileApi();
-    dispatch(actionAsync);
-    const actionAsyncFavorite = getFavApi();
-    dispatch(actionAsyncFavorite);
-  }, []);
   //render order table
   const renderOrderTable = () => {
     const ordersHistory = userProfile?.ordersHistory;
     if (ordersHistory?.length !== 0) {
-      return ordersHistory?.map((order, index) => {
+      return ordersHistory?.slice(0, pageSize).map((order, index) => {
         const { date, orderDetail } = order;
         return (
           <div className="order__table mt-5" key={index}>
@@ -130,7 +123,7 @@ const Profile = () => {
   const renderFav = (data) => {
     if (data?.length !== 0) {
       return data?.map((item, index) => {
-        return <ShoesCard item={item} />;
+        return <ShoesCard item={item} index={index} />;
       });
     }
     return (
@@ -139,17 +132,21 @@ const Profile = () => {
   };
   //Pagination handle
 
-  const [pageSize, setPageSize] = useState(6);
+  const [pageSize, setPageSize] = useState(10);
   const [current, setCurrent] = useState(1);
-  const [totalPage, setTotalPage] = useState(userProfile?.ordersHistory.length);
-  const [minIndex, setMinIndex] = useState(0);
-  const [maxIndex, setMaxIndex] = useState(pageSize);
   const handlePagiChange = (page) => {
     setCurrent(page);
-    setMinIndex((page - 1) * pageSize);
-    setMaxIndex(page * pageSize);
   };
+  //useEffect
+  useEffect(() => {
+    //run at mounting
+    const actionAsync = getProfileApi();
+    dispatch(actionAsync);
+    const actionAsyncFavorite = getFavApi();
+    dispatch(actionAsyncFavorite);
+  }, []);
   // component return
+
   return (
     <>
       {/* PROFILE CONTAINER */}
@@ -306,6 +303,10 @@ const Profile = () => {
               pageSize={pageSize}
               total={userProfile?.ordersHistory.length}
               onChange={handlePagiChange}
+              pageSizeOptions={["10", "20", "30"]}
+              onShowSizeChange={(current, pageSize) => {
+                setPageSize(pageSize);
+              }}
             />
           </div>
           <div
