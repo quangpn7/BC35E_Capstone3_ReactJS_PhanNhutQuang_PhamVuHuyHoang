@@ -4,9 +4,9 @@ import React from "react";
 import * as Yup from "yup";
 import { getCookie, TOKEN } from "../../../utils/config";
 
-const ChangePass = (newPasswordObj) => {
+const ChangePass = () => {
   //handle change password
-  const changePassword = async () => {
+  const changePassword = async (newPasswordObj) => {
     let result = await axios({
       url: "https://shop.cyberlearn.vn/api/Users/changePassword",
       method: "POST",

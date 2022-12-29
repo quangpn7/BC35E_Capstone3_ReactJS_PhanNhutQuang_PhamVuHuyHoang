@@ -1,9 +1,13 @@
+import axios from "axios";
+import { isExpired } from "react-jwt";
+import { history } from "../index";
+
 export const USER_LOGIN = "userLogin";
 export const TOKEN = "accessToken";
 
 export const CYBER_TOKEN =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAzNUUiLCJIZXRIYW5TdHJpbmciOiIzMS8wNS8yMDIzIiwiSGV0SGFuVGltZSI6IjE2ODU0OTEyMDAwMDAiLCJuYmYiOjE2NTczODYwMDAsImV4cCI6MTY4NTYzODgwMH0.LWlPoCoXPHgp2U6FijTqXvKFt7ENvY9Tyn9ux-bVlXo";
-//function localStorage
+//function localStorage - cookies
 export const {
   saveStore,
   saveStoreJSON,
@@ -62,3 +66,53 @@ export const {
       name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
   },
 };
+
+//Interceptor config
+export const http = axios.create({
+  baseURL: "https://shop.cyberlearn.vn", // base domain
+  timeout: 30000, // >30s -> cancel request
+});
+//config interceptors headers
+http.interceptors.request.use(
+  (config) => {
+    config.headers = {
+      ...config.headers,
+      Authorization: `Bearer ${getCookie(TOKEN)}`,
+      TokenCybersoft: CYBER_TOKEN,
+    };
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+//config interceptors response
+
+http.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    const currentURL = window.location.pathname;
+    if (error.response?.status === 404 && currentURL === "/login") {
+      alert("Wrong email or password !");
+    } else if (
+      error.response?.status === 400 ||
+      error.response?.status === 404
+    ) {
+      alert("Không hợp lệ");
+    } else if (
+      error.response?.status === 403 ||
+      error.response?.status === 401
+    ) {
+      if (isExpired(getCookie(TOKEN))) {
+        alert("Login session has been expired, please re-login !");
+        deleteStore(USER_LOGIN);
+        eraseCookie(TOKEN);
+        window.location.href = "/login";
+      }
+      console.log("401");
+      history.push("/login");
+    }
+  }
+);

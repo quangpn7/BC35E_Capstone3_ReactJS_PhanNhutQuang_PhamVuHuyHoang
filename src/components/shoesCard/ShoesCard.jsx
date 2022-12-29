@@ -35,7 +35,7 @@ const ShoesCard = (props) => {
     //     </div>
     //   </div>
     // </div>
-    <div className="product__item card shadow">
+    <div className="product__item card shadow ">
       <div className="card-header position-relative">
         <div className="card-icon position-absolute">
           <i className="fa fa-heart" aria-hidden="true" />

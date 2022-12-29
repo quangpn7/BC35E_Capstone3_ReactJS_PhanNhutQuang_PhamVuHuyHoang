@@ -1,6 +1,9 @@
+import { Pagination } from "antd";
 import { useFormik } from "formik";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import * as Yup from "yup";
+
 import ShoesCard from "../components/shoesCard/ShoesCard";
 
 import {
@@ -17,94 +20,134 @@ const Profile = () => {
       email: userProfile?.email,
       name: userProfile?.name,
       phone: userProfile?.phone,
-      gender: userProfile?.gender,
+      gender: String(userProfile?.gender),
       password: userProfile?.password,
     },
+    validationSchema: Yup.object().shape({
+      email: Yup.string().email("*Invalid email").required("*Required!"),
+      name: Yup.string()
+        .matches(
+          "^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ" +
+            "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ" +
+            "ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]+$",
+          "*Name is not valid!"
+        )
+        .required("*Required!"),
+      gender: Yup.boolean().required("*Required"),
+      phone: Yup.string()
+        .matches(/^[0-9]+$/, "*Invalid phone number")
+        .min(6, "*Phone is not valid!")
+        .max(15, "*Phone is not valid!")
+        .required("*Required!"),
+    }),
     onSubmit: (values) => {
+      console.log(values);
       const actionAsync = updateProfileApi(values);
       dispatch(actionAsync);
     },
     enableReinitialize: true,
   });
+
   //Dispatch declare
   const dispatch = useDispatch();
 
   useEffect(() => {
+    //run at mounting
     const actionAsync = getProfileApi();
     dispatch(actionAsync);
-    const actionGetFav = getFavApi();
-    dispatch(actionGetFav);
+    const actionAsyncFavorite = getFavApi();
+    dispatch(actionAsyncFavorite);
   }, []);
   //render order table
   const renderOrderTable = () => {
     const ordersHistory = userProfile?.ordersHistory;
-    return ordersHistory?.map((order, index) => {
-      const { date, orderDetail } = order;
+    if (ordersHistory?.length !== 0) {
+      return ordersHistory?.map((order, index) => {
+        const { date, orderDetail } = order;
+        return (
+          <div className="order__table mt-5" key={index}>
+            <p className="order__time">
+              + Orders have been placed on {date.split("T")[0]}
+            </p>
+            <table className="table table-hover">
+              <thead>
+                <tr>
+                  <th>
+                    ID: <span className="text-danger">{order?.id}</span>
+                  </th>
+                  <th>IMG</th>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {orderDetail?.map((row, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>
+                        <img src={row.image} width={60} />
+                      </td>
+                      <td>{row.name}</td>
+                      <td>{row.price}</td>
+                      <td>{row.quantity}</td>
+                      <td>{(row.price * row.quantity).toLocaleString()}</td>
+                    </tr>
+                  );
+                })}
 
-      return (
-        <div className="order__table mt-5">
-          <p className="order__time">
-            + Orders have been placed on {date.split("T")[0]}
-          </p>
-          <table className="table table-hover">
-            <thead>
-              <tr>
-                <th>
-                  ID: <span className="text-danger">{order?.id}</span>
-                </th>
-                <th>IMG</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              {orderDetail?.map((row, index) => {
-                return (
-                  <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td>
-                      <img src={row.image} width={60} />
-                    </td>
-                    <td>{row.name}</td>
-                    <td>{row.price}</td>
-                    <td>{row.quantity}</td>
-                    <td>{(row.price * row.quantity).toLocaleString()}</td>
-                  </tr>
-                );
-              })}
+                <tr>
+                  <td />
+                  <td />
+                  <td />
+                  <td />
+                  <td>
+                    <b>Total: </b>
+                  </td>
+                  <td>
+                    <b className="text-danger">
+                      {orderDetail
+                        .reduce((init, current) => {
+                          let totalPerItem = current.price * current.quantity;
+                          return (init += totalPerItem);
+                        }, 0)
+                        .toLocaleString()}
+                    </b>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        );
+      });
+    }
 
-              <tr>
-                <td />
-                <td />
-                <td />
-                <td />
-                <td>
-                  <b>Total: </b>
-                </td>
-                <td>
-                  <b className="text-danger">
-                    {orderDetail
-                      .reduce((init, current) => {
-                        let totalPerItem = current.price * current.quantity;
-                        return (init += totalPerItem);
-                      }, 0)
-                      .toLocaleString()}
-                  </b>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      );
-    });
+    return <p className="display-4 font-italic text-center">No order yet!</p>;
   };
   //render favorite item
   const renderFav = (data) => {
-    return data?.map((item, index) => {
-      return <ShoesCard item={item} />;
-    });
+    if (data?.length !== 0) {
+      return data?.map((item, index) => {
+        return <ShoesCard item={item} />;
+      });
+    }
+    return (
+      <p className="display-4 font-italic text-center">No favorite yet!</p>
+    );
+  };
+  //Pagination handle
+
+  const [pageSize, setPageSize] = useState(6);
+  const [current, setCurrent] = useState(1);
+  const [totalPage, setTotalPage] = useState(userProfile?.ordersHistory.length);
+  const [minIndex, setMinIndex] = useState(0);
+  const [maxIndex, setMaxIndex] = useState(pageSize);
+  const handlePagiChange = (page) => {
+    setCurrent(page);
+    setMinIndex((page - 1) * pageSize);
+    setMaxIndex(page * pageSize);
   };
   // component return
   return (
@@ -131,6 +174,11 @@ const Profile = () => {
                     onChange={frmProfile.handleChange}
                     name="email"
                   />
+                  {frmProfile.errors.email && frmProfile.touched.email && (
+                    <p className="text-danger font-italic">
+                      {frmProfile.errors.email}
+                    </p>
+                  )}
                   <label htmlFor="phone">Phone</label>
                   <input
                     type="text"
@@ -138,6 +186,11 @@ const Profile = () => {
                     defaultValue={userProfile?.phone}
                     onChange={frmProfile.handleChange}
                   />
+                  {frmProfile.errors.phone && frmProfile.touched.phone && (
+                    <p className="text-danger font-italic">
+                      {frmProfile.errors.phone}
+                    </p>
+                  )}
                 </div>
                 <div className="col-6">
                   <label htmlFor="name">Name</label>
@@ -147,6 +200,11 @@ const Profile = () => {
                     defaultValue={userProfile?.name}
                     onChange={frmProfile.handleChange}
                   />
+                  {frmProfile.errors.name && frmProfile.touched.name && (
+                    <p className="font-italic text-danger">
+                      {frmProfile.errors.name}
+                    </p>
+                  )}
                   <label htmlFor="password">Password</label>
                   <button
                     className="btn btn-primary btn-lg mb-4"
@@ -187,7 +245,11 @@ const Profile = () => {
                       />
                       <label htmlFor="genderFemale">Female</label>
                     </div>
-                    <button type="submit" className="update-btn">
+                    <button
+                      type="submit"
+                      onClick={frmProfile.handleSubmit}
+                      className="update-btn"
+                    >
                       Update
                     </button>
                   </div>
@@ -238,6 +300,13 @@ const Profile = () => {
             aria-labelledby="home-tab"
           >
             {renderOrderTable()}
+            <Pagination
+              className="text-right"
+              current={current}
+              pageSize={pageSize}
+              total={userProfile?.ordersHistory.length}
+              onChange={handlePagiChange}
+            />
           </div>
           <div
             className="tab-pane fade"
@@ -249,30 +318,6 @@ const Profile = () => {
               <div className="product__grid row" id="productHolder">
                 {/* standard card */}
                 {renderFav(userFav?.productsFavorite)}
-                <div className="product__item card shadow">
-                  <div className="card-header position-relative">
-                    <div className="card-icon position-absolute">
-                      <i className="fa fa-heart" aria-hidden="true" />
-                    </div>
-                    <img
-                      src="./assets/img/image 5.png"
-                      alt="itemImg"
-                      className="w-100"
-                    />
-                  </div>
-                  <div className="card-body p-0">
-                    <div className="card-body-upper p-3">
-                      <h3>Adidas Prophere</h3>
-                      <p className="m-0">Short discription</p>
-                    </div>
-                    <div className="card-body-under d-flex align-items-center">
-                      <button className="w-50 btn-buy">Buy now</button>
-                      <div className="price-wrap w-50">
-                        <p className="font-weight-bold text-right m-0">85$</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>

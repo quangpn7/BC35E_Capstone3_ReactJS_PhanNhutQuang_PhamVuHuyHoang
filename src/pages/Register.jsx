@@ -29,7 +29,7 @@ const Register = () => {
       phone: "",
     },
     validationSchema: Yup.object().shape({
-      email: Yup.string().email("Invalid email").required("*Required!"),
+      email: Yup.string().email("*Invalid email").required("*Required!"),
       password: Yup.string()
         .min(8, "*Minimum 8 characters")
         .max(16, "*Maximum 16 characters")
