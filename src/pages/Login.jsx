@@ -4,6 +4,8 @@ import * as Yup from "yup";
 import { loginApi } from "../redux/reducer/userReducer";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { FacebookLogin } from "react-facebook-login";
+import LoginFacebook from "../components/LoginFacebook/LoginFacebook";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -68,13 +70,7 @@ const Login = () => {
                 Login
               </button>
             </div>
-            <button className="btn-login-fb position-relative">
-              <img
-                className="position-absolute"
-                src="./img/facebook-icon.png"
-              />
-              Continue with Facebook
-            </button>
+            <LoginFacebook />
           </form>
         </div>
       </div>

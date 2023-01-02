@@ -67,18 +67,6 @@ export const loginApi = (data) => {
 //get profile api
 export const getProfileApi = () => {
   return async (dispatch) => {
-    // let result = await axios({
-    //   url: "https://shop.cyberlearn.vn/api/Users/getProfile",
-    //   method: "POST",
-    //   headers: {
-    //     Authorization: `Bearer ${getCookie(TOKEN)}`,
-    //   },
-    // }).catch((error) => {
-    //   // if 401 -> /login
-    //   if (error.response.status === 401) {
-    //     history.push("/login");
-    //   }
-    // });
     let result = await http.post("/api/Users/getProfile");
 
     const action = getProfileAction(result?.data.content);
@@ -88,14 +76,6 @@ export const getProfileApi = () => {
 //update profile api
 export const updateProfileApi = (data) => {
   return async (dispatch) => {
-    // let result = await axios({
-    //   url: "https://shop.cyberlearn.vn/api/Users/updateProfile",
-    //   method: "POST",
-    //   headers: {
-    //     Authorization: `Bearer ${getCookie(TOKEN)}`,
-    //   },
-    //   data: data,
-    // });
     let result = await http.post("/api/Users/updateProfile", data);
     //udpate current store at time
     if (result.data.statusCode === 200) {
@@ -108,13 +88,6 @@ export const updateProfileApi = (data) => {
 //get favorite api
 export const getFavApi = () => {
   return async (dispatch) => {
-    // let result = await axios({
-    //   url: "https://shop.cyberlearn.vn/api/Users/getproductfavorite",
-    //   method: "GET",
-    //   headers: {
-    //     Authorization: `Bearer ${getCookie(TOKEN)}`,
-    //   },
-    // });
     let result = await http.get("/api/Users/getproductfavorite");
     const action = getFavItemAction(result?.data.content);
     dispatch(action);

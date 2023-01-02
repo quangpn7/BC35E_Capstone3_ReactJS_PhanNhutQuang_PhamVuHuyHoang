@@ -31,7 +31,7 @@ const Template = () => {
             aria-haspopup="true"
             aria-expanded="false"
           >
-            {userLogin.email}
+            {userLogin.email || userLogin.name}
           </a>
           <div className="dropdown-menu">
             <NavLink className="dropdown-item" to="/profile">
