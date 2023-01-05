@@ -1,11 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-
+const ShoesCard = (props) => {
   const { item, index } = props;
-
   return (
-
     <div className="product__item card shadow" key={index}>
       <div className="card-header position-relative">
         <div className="card-icon position-absolute">
@@ -25,7 +23,6 @@ import { NavLink } from "react-router-dom";
 
           <div className="price-wrap w-50 ">
             <p className="font-weight-bold text-right m-0">85$</p>
-
           </div>
         </div>
       </div>
