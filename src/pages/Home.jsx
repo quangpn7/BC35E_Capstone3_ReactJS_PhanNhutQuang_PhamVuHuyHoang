@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllProductApi } from "../redux/reducer/productReducer";
 import ShoesCard from "../components/shoesCard/ShoesCard";
+import { NavLink } from "react-router-dom";
 
 const contentStyle = {
   margin: 0,
@@ -27,17 +28,14 @@ const Home = () => {
   useEffect(() => {
     //call API:
     getAllProduct();
-    console.log("arrProd", arrProduct);
   }, []);
-
- 
 
   const onChange = (currentSlice) => {};
 
   return (
     <div>
       <Carousel afterChange={onChange}>
-        {arrProduct.slice(0, 4).map((item, index) => {
+        {arrProduct?.slice(0, 4).map((item, index) => {
           return (
             <div key={index}>
               <div style={contentStyle} className="d-flex">
@@ -45,13 +43,20 @@ const Home = () => {
                   <img
                     className="w-100 h-100"
                     src={item.image}
-                    alt=""
+                    alt="..."
                     style={{ objectFit: "cover" }}
                   />
                 </div>
-                <div className="w-50">
-                  <h3>{item.name}</h3>
-                  <p>{item.shortDescription}</p>
+                <div className="w-50 d-flex flex-column justify-content-center" >
+                  <div className="">
+                    <h3>{item.name}</h3>
+                    <p>{item.shortDescription}</p>
+                  </div>
+                  <div>
+                    <NavLink to={`/detail/${item?.id}`} className="w-50 btn btn-success d-inline ">
+                      Buy Now
+                    </NavLink>
+                  </div>
                 </div>
               </div>
             </div>
@@ -62,11 +67,10 @@ const Home = () => {
       <div className="container">
         <h2 className="text-left py-5">Product Features </h2>
         <div className="row">
-          {arrProduct.slice(0,6).map((item, index) => {
+          {arrProduct.slice(0, 6).map((item, index) => {
             return (
-              <div className="col-4" key={index}>
+              <div className="col-4 mb-4" key={index}>
                 <ShoesCard item={item} />
-                
               </div>
             );
           })}
