@@ -1,7 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./assets/scss/main.scss";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+  unstable_HistoryRouter as HistoryBrowser,
+} from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./redux/configStore";
 import Home from "./pages/Home";
@@ -12,11 +18,17 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Carts from "./pages/Carts";
 import Template from "./templates/HomeTemplates/Template";
+import Modal from "./components/HOC/Modal/Modal";
+import { createBrowserHistory } from "history";
 
+export const history = createBrowserHistory(); //history lib init
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <HistoryBrowser history={history}>
+      {" "}
+      {/** Replaced*/}
+      <Modal />
       <Routes>
         <Route path="" element={<Template />}>
           <Route index element={<Home />} />
@@ -31,6 +43,6 @@ root.render(
           <Route path="*" element={<Navigate to="" />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HistoryBrowser>
   </Provider>
 );
