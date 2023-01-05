@@ -69,7 +69,7 @@ const Carts = () => {
                       dispatch(action);
                       }}>-</button>
                   </td>
-                  <td>1000</td>
+                  <td>{item.price * item.quantity} $</td>
                   <td className="buttons">
                     <button className="cart_action-btn cart-btnEdit mx-1">
                       Edit

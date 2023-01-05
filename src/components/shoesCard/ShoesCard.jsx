@@ -3,10 +3,9 @@ import { NavLink } from "react-router-dom";
 
 const ShoesCard = (props) => {
   const { item } = props;
-  console.log("item", item);
 
   return (
-    <div className="card h-100">
+    <div className="card h-100 ">
       <div
         className="card-head"
         style={{
@@ -19,12 +18,12 @@ const ShoesCard = (props) => {
         <img src={item?.image} className="w-100" alt="" />
         <div className="card-body">
           <div className="h-50">
-            <h3 className="test-wrap">{item.name}</h3>
+            <h3>{item.name}</h3>
           </div>
 
           <div className="h-50">
             <p>
-              {item?.description}
+              {item?.description?.length > 10 ? item?.description.substring(0,10) + "..." : item?.description }
             </p>
             <NavLink
               to={`/detail/${item?.id}`}

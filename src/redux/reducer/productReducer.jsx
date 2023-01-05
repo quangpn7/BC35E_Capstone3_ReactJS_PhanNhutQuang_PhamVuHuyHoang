@@ -65,11 +65,14 @@ const productReducer = createSlice({
             }
           }
         }
+      },
+      getAllProductByCategoryAction: (state, action) => { 
+        state.arrProduct = action.payload
       }
-    }
+     }
 });
 
-export const { getProductAction, getProductDetailAction, addGioHangAction, deleteItemAction,addItemAction } =
+export const { getProductAction, getProductDetailAction, addGioHangAction, deleteItemAction,addItemAction, getAllProductByCategoryAction } =
   productReducer.actions;
 
 export default productReducer.reducer;
@@ -99,4 +102,14 @@ export const getProductByIdApi = (id) => {
   };
 };
 
+export const getAllProductByCategory = (keyword) => { 
+  return async (dispatch) => { 
+    const result = await axios ({
+      url: `https://shop.cyberlearn.vn/api/Product/getAllCategory?keyword=` + keyword,
+      method: 'GET',
+    })
+    const action = getAllProductByCategoryAction(result.data.content)
+    dispatch(action)
+  }
+}
 

@@ -26,7 +26,7 @@ const Template = () => {
                 </NavLink>
               </span>
               <span>
-                <NavLink to="./register.html" id="btnRegister">
+                <NavLink to="/register" id="btnRegister">
                   Register
                 </NavLink>
               </span>
@@ -95,7 +95,7 @@ const Template = () => {
               <h3>GET HELP</h3>
               <ul className="list-unstyled">
                 <li>
-                  <NavLink to="#">Home</NavLink>
+                  <NavLink to="/home">Home</NavLink>
                 </li>
                 <li>
                   <NavLink to="#">Nike</NavLink>
@@ -129,10 +129,10 @@ const Template = () => {
               <h3>REGISTER</h3>
               <ul className="list-unstyled">
                 <li>
-                  <NavLink to="#">Register</NavLink>
+                  <NavLink to="/register">Register</NavLink>
                 </li>
                 <li>
-                  <NavLink to="#">Login</NavLink>
+                  <NavLink to="/login">Login</NavLink>
                 </li>
               </ul>
             </div>
