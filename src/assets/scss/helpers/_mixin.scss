@@ -3,3 +3,25 @@
   font-weight: $fw !important;
   color: $color;
 }
+//responsive
+@mixin responsive($screen) {
+  @if (map-has-key($map: $breakpoints, $key: $screen)) {
+    $value: map-get(
+      $map: $breakpoints,
+      $key: $screen,
+    );
+    @media screen and (max-width: $value) {
+      @content;
+    }
+  } @else {
+    @warn "màn hình chưa khai báo";
+  }
+}
+//Example:
+/* 
+@include responsive("large-down"){
+    .phoneCarousel{
+        padding: $pd-8 0;
+    } 
+}
+*/
