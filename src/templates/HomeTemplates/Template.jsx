@@ -1,8 +1,73 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import {
+  deleteStore,
+  eraseCookie,
+  TOKEN,
+  USER_LOGIN,
+} from "../../utils/config";
 
 const Template = () => {
+  const { userLogin } = useSelector((state) => state.userReducer);
+  const signOut = () => {
+    deleteStore(USER_LOGIN);
+    eraseCookie(TOKEN);
+    window.location.reload();
+  };
+  const renderLogin = () => {
+    if (userLogin) {
+      return (
+        // <NavLink className="text-white mt-2" to="profile">
+        //   {userLogin.email}
+        // </NavLink>
+        <li className="nav-item dropdown">
+          <a
+            className="nav-link dropdown-toggle mb-2"
+            data-toggle="dropdown"
+            href="#"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            {userLogin.email || userLogin.name}
+          </a>
+          <div className="dropdown-menu">
+            <NavLink className="dropdown-item" to="/profile">
+              Profile
+            </NavLink>
+            <div className="dropdown-divider"></div>
+
+            <button
+              className="dropdown-item "
+              onClick={() => {
+                signOut();
+              }}
+            >
+              Sign-out
+            </button>
+          </div>
+        </li>
+      );
+    }
+    return (
+      <div>
+        <span>
+          <NavLink to="login" id="btnLogin">
+            Login
+          </NavLink>
+        </span>
+        <span>
+          <NavLink to="register" id="btnRegister">
+            Register
+          </NavLink>
+        </span>
+      </div>
+    );
+  };
+
+  //Component return
   return (
     <div>
       <header>
@@ -14,22 +79,14 @@ const Template = () => {
               </NavLink>
             </div>
             <div className="header__feature d-flex align-items-center">
-              <NavLink to='/carts'>
-              <i className="fa fa-shopping-cart" style={{cursor:"pointer", fontSize:"10px !important"}}/>
-              <span id="item_count">(0)</span>
-
+              <NavLink to="/carts">
+                <i
+                  className="fa fa-shopping-cart"
+                  style={{ cursor: "pointer", fontSize: "10px !important" }}
+                />
+                <span id="item_count">(0)</span>
               </NavLink>
-             
-              <span>
-                <NavLink to="/login" id="btnLogin">
-                  Login
-                </NavLink>
-              </span>
-              <span>
-                <NavLink to="./register.html" id="btnRegister">
-                  Register
-                </NavLink>
-              </span>
+              {renderLogin()}
             </div>
           </div>
         </div>
@@ -39,34 +96,17 @@ const Template = () => {
         <div className="navigation__wrap">
           <ul className="nav">
             <li className="nav-item active">
-              <NavLink
-                className="nav-link"
-                to="/home"
-                id="btnHome"
-             
-              >
+              <NavLink className="nav-link" to="/home" id="btnHome">
                 Home
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink
-                className="nav-link"
-                to="#"
-                id="btnMen"
-                value="men"
-                
-              >
+              <NavLink className="nav-link" to="#" id="btnMen" value="men">
                 Men
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink
-                className="nav-link"
-                to="#"
-                id="btnWoman"
-                value="women"
-               
-              >
+              <NavLink className="nav-link" to="#" id="btnWoman" value="women">
                 Woman
               </NavLink>
             </li>
@@ -84,10 +124,7 @@ const Template = () => {
         </div>
       </section>
       <Outlet />
-      
-      
-      
-      
+
       <footer>
         <div className="footer__wrap mx-auto">
           <div className="row container mx-auto">

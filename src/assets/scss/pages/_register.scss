@@ -15,9 +15,8 @@ section.register {
     .register__left,
     .register__right {
       p.register__invalid {
-        @include styleText($fs-1, $fw-1, $color-red);
+        @include styleText($fs-2, $fw-1, $color-red);
         font-style: italic;
-        display: none;
       }
 
       input {

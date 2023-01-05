@@ -23,10 +23,13 @@ section.profile {
       input {
         display: block;
       }
+      label:nth-child(3) {
+        margin-top: 30px;
+      }
       input {
         background-color: rgba(33, 33, 33, 0.08);
         border: none;
-        margin-bottom: 37px;
+
         padding: 14px;
         width: 90%;
       }
