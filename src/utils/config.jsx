@@ -1,5 +1,6 @@
 import axios from "axios";
 import { isExpired } from "react-jwt";
+import { toast } from "react-toastify";
 import { history } from "../index";
 
 export const USER_LOGIN = "userLogin";
@@ -95,7 +96,7 @@ http.interceptors.response.use(
   (error) => {
     const currentURL = window.location.pathname;
     if (error.response?.status === 404 && currentURL === "/login") {
-      alert("Wrong email or password !");
+      toast.error("Wrong email or password! Please try again");
     } else if (
       error.response?.status === 400 ||
       error.response?.status === 404
@@ -106,7 +107,7 @@ http.interceptors.response.use(
       error.response?.status === 401
     ) {
       if (isExpired(getCookie(TOKEN))) {
-        alert("Login session has been expired, please re-login !");
+        toast.warn("Login session has been expired, please re-login !");
         deleteStore(USER_LOGIN);
         eraseCookie(TOKEN);
         window.location.href = "/login";

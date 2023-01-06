@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useFormik } from "formik";
 import React from "react";
+import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { getCookie, TOKEN } from "../../../utils/config";
 
@@ -14,8 +15,9 @@ const ChangePass = () => {
         Authorization: `Bearer ${getCookie(TOKEN)}`,
       },
       data: newPasswordObj,
+    }).then(() => {
+      toast.success("Updated password!");
     });
-    console.log(result.data);
   };
   //handle get form input
   const frmUpdatePass = useFormik({

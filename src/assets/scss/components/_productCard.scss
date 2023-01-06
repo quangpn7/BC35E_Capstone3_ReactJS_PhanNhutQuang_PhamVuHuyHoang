@@ -46,8 +46,11 @@
       top: 30px;
       right: 26px;
       i {
-        @include styleText($fs-4, $fw-2, $color-red);
+        @include styleText($fs-4, $fw-2, gray);
         cursor: pointer;
+      }
+      i.isLiked {
+        color: red !important;
       }
     }
   }

@@ -5,6 +5,9 @@ import { useEffect } from "react";
 import { getAllProductApi } from "../redux/reducer/productReducer";
 import ShoesCard from "../components/shoesCard/ShoesCard";
 import { NavLink } from "react-router-dom";
+import { getFavApi } from "../redux/reducer/userReducer";
+import { getCookie, TOKEN } from "../utils/config";
+import { toast } from "react-toastify";
 
 const contentStyle = {
   margin: 0,
@@ -20,6 +23,7 @@ const contentStyle = {
 
 const Home = () => {
   const { arrProduct } = useSelector((state) => state.productReducer);
+
   const dispatch = useDispatch();
 
   //ham call API:
@@ -27,10 +31,15 @@ const Home = () => {
     const action = getAllProductApi();
     dispatch(action);
   };
-
+  const { userFav } = useSelector((state) => state.userReducer);
   useEffect(() => {
     //call API:
     getAllProduct();
+    //get userFav
+    if (getCookie(TOKEN)) {
+      const actionAsyncFavorite = getFavApi();
+      dispatch(actionAsyncFavorite);
+    }
   }, []);
 
   const onChange = (currentSlice) => {};

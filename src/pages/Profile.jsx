@@ -3,8 +3,8 @@ import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
-
-import ShoesCard from "../components/shoesCard/ShoesCard";
+import { Favourite } from "../components/Favorite/Favorite";
+import { OrderHistoryTable } from "../components/OrderHistory/OrderHistoryTable";
 
 import {
   getFavApi,
@@ -41,7 +41,6 @@ const Profile = () => {
         .required("*Required!"),
     }),
     onSubmit: (values) => {
-      console.log(values);
       const actionAsync = updateProfileApi(values);
       dispatch(actionAsync);
     },
@@ -51,90 +50,11 @@ const Profile = () => {
   //Dispatch declare
   const dispatch = useDispatch();
 
-  //render order table
-  const renderOrderTable = () => {
-    const ordersHistory = userProfile?.ordersHistory;
-    if (ordersHistory?.length !== 0) {
-      return ordersHistory?.slice(minIndex, maxIndex).map((order, index) => {
-        const { date, orderDetail } = order;
-        return (
-          <div className="order__table mt-5" key={index}>
-            <p className="order__time">
-              + Orders have been placed on {date.split("T")[0]}
-            </p>
-
-            <table className="table table-hover table-responsive-sm">
-              <thead>
-                <tr>
-                  <th>
-                    ID: <span className="text-danger">{order?.id}</span>
-                  </th>
-                  <th>IMG</th>
-                  <th>Name</th>
-                  <th>Price</th>
-                  <th>Quantity</th>
-                  <th>Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                {orderDetail?.map((row, index) => {
-                  return (
-                    <tr key={index}>
-                      <td>{index + 1}</td>
-                      <td>
-                        <img src={row.image} width={100} />
-                      </td>
-                      <td>{row.name}</td>
-                      <td>{row.price}</td>
-                      <td>{row.quantity}</td>
-                      <td>{(row.price * row.quantity).toLocaleString()}</td>
-                    </tr>
-                  );
-                })}
-                <tr>
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td>
-                    <b>Total: </b>
-                  </td>
-                  <td>
-                    <b className="text-danger">
-                      {orderDetail
-                        .reduce((init, current) => {
-                          let totalPerItem = current.price * current.quantity;
-                          return (init += totalPerItem);
-                        }, 0)
-                        .toLocaleString()}
-                    </b>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        );
-      });
-    }
-
-    return <p className="display-4 font-italic text-center">No order yet!</p>;
-  };
-  //render favorite item
-  const renderFav = (data) => {
-    if (data?.length !== 0) {
-      return data?.map((item, index) => {
-        return <ShoesCard item={item} index={index} />;
-      });
-    }
-    return (
-      <p className="display-4 font-italic text-center">No favorite yet!</p>
-    );
-  };
   //Pagination handle
   const [current, setCurrent] = useState(1);
-  // const [minIndex, setMinIndex] = useState((current - 1) * 10);
+
   const [minIndex, setMinIndex] = useState(0);
-  // const [maxIndex, setMaxIndex] = useState(current * 10);
+
   const [maxIndex, setMaxIndex] = useState(10);
 
   const handlePagiChange = (page) => {
@@ -303,7 +223,7 @@ const Profile = () => {
             role="tabpanel"
             aria-labelledby="home-tab"
           >
-            {renderOrderTable()}
+            {OrderHistoryTable(userProfile?.ordersHistory, minIndex, maxIndex)}
             <Pagination
               className="text-right"
               showSizeChanger={false}
@@ -322,7 +242,7 @@ const Profile = () => {
             <div className="product__content">
               <div className="product__grid row" id="productHolder">
                 {/* standard card */}
-                {renderFav(userFav?.productsFavorite)}
+                {Favourite(userFav?.productsFavorite)}
               </div>
             </div>
           </div>

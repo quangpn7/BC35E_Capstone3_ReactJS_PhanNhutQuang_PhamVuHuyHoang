@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./assets/scss/main.scss";
+import "react-toastify/dist/ReactToastify.css";
 import {
   BrowserRouter,
   Navigate,
@@ -20,6 +21,7 @@ import Carts from "./pages/Carts";
 import Template from "./templates/HomeTemplates/Template";
 import Modal from "./components/HOC/Modal/Modal";
 import { createBrowserHistory } from "history";
+import { ToastContainer } from "react-toastify";
 
 export const history = createBrowserHistory(); //history lib init
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -29,6 +31,7 @@ root.render(
       {" "}
       {/** Replaced*/}
       <Modal />
+      <ToastContainer />
       <Routes>
         <Route path="" element={<Template />}>
           <Route index element={<Home />} />

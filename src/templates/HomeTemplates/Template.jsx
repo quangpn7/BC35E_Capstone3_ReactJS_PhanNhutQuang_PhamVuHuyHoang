@@ -14,6 +14,7 @@ const Template = () => {
   const signOut = () => {
     deleteStore(USER_LOGIN);
     eraseCookie(TOKEN);
+
     window.location.reload();
   };
   const renderLogin = () => {

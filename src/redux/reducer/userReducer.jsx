@@ -10,6 +10,7 @@ import {
   http,
 } from "../../utils/config";
 import { history } from "../../index";
+import { toast } from "react-toastify";
 const initialState = {
   userLogin: getStoreJSON(USER_LOGIN) ? getStoreJSON(USER_LOGIN) : null,
   userProfile: null,
@@ -46,11 +47,6 @@ export default userReducer.reducer;
 //#region async
 export const loginApi = (data) => {
   return async (dispatch) => {
-    // let result = await axios({
-    //   url: "https://shop.cyberlearn.vn/api/Users/signin",
-    //   method: "POST",
-    //   data: data,
-    // });
     let result = await http.post("/api/Users/signin", data);
 
     if (result?.status === 200) {
@@ -60,7 +56,10 @@ export const loginApi = (data) => {
       saveStoreJSON(USER_LOGIN, result.data.content);
       //Set cookie
       setCookie(TOKEN, result?.data.content.accessToken);
+
+      toast.success("Login success!");
       history.push("/");
+      toast.info(`Hello! ${result?.data.content.email}`);
     }
   };
 };
@@ -68,7 +67,6 @@ export const loginApi = (data) => {
 export const getProfileApi = () => {
   return async (dispatch) => {
     let result = await http.post("/api/Users/getProfile");
-
     const action = getProfileAction(result?.data.content);
     dispatch(action);
   };
@@ -81,7 +79,7 @@ export const updateProfileApi = (data) => {
     if (result.data.statusCode === 200) {
       const actionUpdateStore = getProfileApi();
       dispatch(actionUpdateStore);
-      alert("Update successfully!");
+      toast.success("Update success!");
     }
   };
 };
