@@ -52,7 +52,7 @@ const Template = () => {
       );
     }
     return (
-      <div>
+      <div className="d-flex">
         <span>
           <NavLink to="login" id="btnLogin">
             Login
@@ -79,7 +79,7 @@ const Template = () => {
               </NavLink>
             </div>
             <div className="header__feature d-flex align-items-center">
-              <NavLink to="/carts">
+              <NavLink to="/carts" className="d-flex align-items-center">
                 <i
                   className="fa fa-shopping-cart"
                   style={{ cursor: "pointer", fontSize: "10px !important" }}
@@ -88,7 +88,6 @@ const Template = () => {
               </NavLink>
 
               {renderLogin()}
-
             </div>
           </div>
         </div>
@@ -130,7 +129,7 @@ const Template = () => {
       <footer>
         <div className="footer__wrap mx-auto">
           <div className="row container mx-auto">
-            <div className="footer__link footer__help col-lg-4">
+            <div className="footer__link footer__help col-md-4 ">
               <h3>GET HELP</h3>
               <ul className="list-unstyled">
                 <li>
@@ -147,7 +146,7 @@ const Template = () => {
                 </li>
               </ul>
             </div>
-            <div className="footer__link footer__support col-lg-4">
+            <div className="footer__link footer__support col-md-4 ">
               <h3>SUPPORT</h3>
               <ul className="list-unstyled">
                 <li>
@@ -164,7 +163,7 @@ const Template = () => {
                 </li>
               </ul>
             </div>
-            <div className="footer__link footer__register col-lg-4">
+            <div className="footer__link footer__register col-md-4 ">
               <h3>REGISTER</h3>
               <ul className="list-unstyled">
                 <li>

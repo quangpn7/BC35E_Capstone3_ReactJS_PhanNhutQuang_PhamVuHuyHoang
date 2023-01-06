@@ -14,7 +14,11 @@ const ShoesCard = (props) => {
       <div className="card-body p-0">
         <div className="card-body-upper p-3">
           <h3 className="text-truncate">{item.name}</h3>
-          <p className="m-0">{item?.description}</p>
+          <p className="m-0">
+            {item?.description?.length > 70
+              ? `${item?.description.slice(0, 70)}...`
+              : item?.description}
+          </p>
         </div>
         <div className="card-body-under d-flex align-items-center">
           <NavLink to={`/detail/${item?.id}`} className="w-50 btn-buy">

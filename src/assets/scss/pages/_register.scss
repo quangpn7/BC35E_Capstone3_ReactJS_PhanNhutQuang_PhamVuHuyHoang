@@ -65,12 +65,24 @@ section.register {
         label {
           @include styleText($fs-3, $fw-2, $color-black);
           margin: 0;
-          margin-right: 60px !important;
+          margin-right: 60px;
         }
         p {
           margin-bottom: 0;
         }
       }
     }
+  }
+}
+@include responsive("large-down") {
+  .register__gender {
+    label {
+      @include styleText($fs-3, $fw-2, $color-black);
+      margin: 0;
+      margin-right: 20px !important;
+    }
+  }
+  .btn-submit {
+    width: 100%;
   }
 }

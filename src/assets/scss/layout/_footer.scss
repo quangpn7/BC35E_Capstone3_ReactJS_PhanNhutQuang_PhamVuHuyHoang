@@ -38,3 +38,20 @@ footer {
     background-color: $color-footer-credit;
   }
 }
+
+@include responsive("small-down") {
+  .footer__support,
+  .footer__register,
+  .footer__help {
+    padding-left: 0px !important;
+    margin-bottom: 20px;
+  }
+}
+@include responsive("large-down") {
+  .footer__support,
+  .footer__register,
+  .footer__help {
+    padding-left: 30px !important;
+    margin-bottom: 20px;
+  }
+}

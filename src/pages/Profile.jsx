@@ -55,14 +55,15 @@ const Profile = () => {
   const renderOrderTable = () => {
     const ordersHistory = userProfile?.ordersHistory;
     if (ordersHistory?.length !== 0) {
-      return ordersHistory?.slice(0, pageSize).map((order, index) => {
+      return ordersHistory?.slice(minIndex, maxIndex).map((order, index) => {
         const { date, orderDetail } = order;
         return (
           <div className="order__table mt-5" key={index}>
             <p className="order__time">
               + Orders have been placed on {date.split("T")[0]}
             </p>
-            <table className="table table-hover">
+
+            <table className="table table-hover table-responsive-sm">
               <thead>
                 <tr>
                   <th>
@@ -81,7 +82,7 @@ const Profile = () => {
                     <tr key={index}>
                       <td>{index + 1}</td>
                       <td>
-                        <img src={row.image} width={60} />
+                        <img src={row.image} width={100} />
                       </td>
                       <td>{row.name}</td>
                       <td>{row.price}</td>
@@ -90,7 +91,6 @@ const Profile = () => {
                     </tr>
                   );
                 })}
-
                 <tr>
                   <td />
                   <td />
@@ -131,11 +131,16 @@ const Profile = () => {
     );
   };
   //Pagination handle
-
-  const [pageSize, setPageSize] = useState(10);
   const [current, setCurrent] = useState(1);
+  // const [minIndex, setMinIndex] = useState((current - 1) * 10);
+  const [minIndex, setMinIndex] = useState(0);
+  // const [maxIndex, setMaxIndex] = useState(current * 10);
+  const [maxIndex, setMaxIndex] = useState(10);
+
   const handlePagiChange = (page) => {
     setCurrent(page);
+    setMinIndex((page - 1) * 10);
+    setMaxIndex(page * 10);
   };
   //useEffect
   useEffect(() => {
@@ -155,15 +160,15 @@ const Profile = () => {
           <h1 className="profile__title">Profile</h1>
           <div className="profile__info">
             <div className="row mx-auto align-items-start">
-              <div className="col-2">
+              <div className="col-lg-2 col-12">
                 <img src={userProfile?.avatar} alt="..." className="mt-2" />
               </div>
               <form
-                className="col-10 row"
+                className="col-lg-10 col-12 row"
                 action="submit"
                 onSubmit={frmProfile.handleSubmit}
               >
-                <div className="col-6">
+                <div className="col-12 col-md-6">
                   <label htmlFor="email">Email</label>
                   <input
                     type="email"
@@ -189,7 +194,7 @@ const Profile = () => {
                     </p>
                   )}
                 </div>
-                <div className="col-6">
+                <div className="col-12 col-md-6">
                   <label htmlFor="name">Name</label>
                   <input
                     name="name"
@@ -216,31 +221,33 @@ const Profile = () => {
                   >
                     Change password
                   </button>
-                  <div className="profile__gender d-flex align-items-center">
-                    <label htmlFor="gender" className="pb-4">
-                      Gender
-                    </label>
-                    <div className="gender-male text-center">
-                      <input
-                        type="radio"
-                        value={true}
-                        name="gender"
-                        className="d-block mb-3"
-                        defaultChecked={userProfile?.gender}
-                        onChange={frmProfile.handleChange}
-                      />
-                      <label htmlFor="genderMale">Male</label>
-                    </div>
-                    <div className="gender-female text-center">
-                      <input
-                        type="radio"
-                        value={false}
-                        name="gender"
-                        defaultChecked={!userProfile?.gender}
-                        className="d-block mb-3"
-                        onChange={frmProfile.handleChange}
-                      />
-                      <label htmlFor="genderFemale">Female</label>
+                  <div className="profile__gender d-lg-flex align-items-center">
+                    <div className="d-flex align-items-center">
+                      <label htmlFor="gender" className="pb-4">
+                        Gender
+                      </label>
+                      <div className="gender-male text-center">
+                        <input
+                          type="radio"
+                          value={true}
+                          name="gender"
+                          className="d-block mb-3"
+                          defaultChecked={userProfile?.gender}
+                          onChange={frmProfile.handleChange}
+                        />
+                        <label htmlFor="genderMale">Male</label>
+                      </div>
+                      <div className="gender-female text-center">
+                        <input
+                          type="radio"
+                          value={false}
+                          name="gender"
+                          defaultChecked={!userProfile?.gender}
+                          className="d-block mb-3"
+                          onChange={frmProfile.handleChange}
+                        />
+                        <label htmlFor="genderFemale">Female</label>
+                      </div>
                     </div>
                     <button
                       type="submit"
@@ -299,14 +306,11 @@ const Profile = () => {
             {renderOrderTable()}
             <Pagination
               className="text-right"
+              showSizeChanger={false}
               current={current}
-              pageSize={pageSize}
+              pageSize={10}
               total={userProfile?.ordersHistory.length}
               onChange={handlePagiChange}
-              pageSizeOptions={["10", "20", "30"]}
-              onShowSizeChange={(current, pageSize) => {
-                setPageSize(pageSize);
-              }}
             />
           </div>
           <div

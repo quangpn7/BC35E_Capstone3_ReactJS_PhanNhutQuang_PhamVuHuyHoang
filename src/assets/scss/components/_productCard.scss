@@ -1,6 +1,6 @@
 .product__item {
   background-color: $color-light-gray;
-  width: 334px;
+
   position: relative; //for heart icon
   transition: all 0.2s linear;
   &:hover {
@@ -35,8 +35,6 @@
       margin-bottom: 20px !important;
     }
   }
-}
-.item-bottom {
 }
 
 .product__item.card {

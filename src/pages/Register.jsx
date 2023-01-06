@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import axios from "axios";
-import { ErrorMessage, useFormik } from "formik";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 
 const Register = () => {
@@ -51,7 +51,7 @@ const Register = () => {
         .required("*Required!"),
       gender: Yup.boolean().required("*Required"),
       phone: Yup.string()
-        .matches(/^[0-9]+$/)
+        .matches(/^[0-9]+$/, "*Phone is not invalid!")
         .min(6, "*Phone is not valid!")
         .max(15, "*Phone is not valid!")
         .required("*Required!"),

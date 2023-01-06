@@ -1,6 +1,6 @@
 @mixin styleText($fs, $fw, $color) {
-  font-size: $fs !important;
-  font-weight: $fw !important;
+  font-size: $fs;
+  font-weight: $fw;
   color: $color;
 }
 //responsive

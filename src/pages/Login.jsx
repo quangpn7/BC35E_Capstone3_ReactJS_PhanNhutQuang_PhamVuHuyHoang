@@ -3,12 +3,11 @@ import { useFormik, yupToFormErrors } from "formik";
 import * as Yup from "yup";
 import { loginApi } from "../redux/reducer/userReducer";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
-import { FacebookLogin } from "react-facebook-login";
+import { NavLink, useParams } from "react-router-dom";
+
 import LoginFacebook from "../components/LoginFacebook/LoginFacebook";
 
 const Login = () => {
-
   const dispatch = useDispatch();
   const frmLogin = useFormik({
     initialValues: {
@@ -62,12 +61,15 @@ const Login = () => {
             {frmLogin.errors.password && frmLogin.touched.password && (
               <span className="mt-2">{frmLogin.errors.password}</span>
             )}
-            <div className="d-flex align-items-center justify-content-end login__option">
-              <div className="col-4" />
-              <a href="#" className="col-4 text-center">
+            <div className="d-md-flex align-items-center justify-content-end login__option">
+              <div className="col-md-4 col-6 form-option" />
+              <NavLink
+                to={"/register"}
+                className="col-md-4 col-6 text-center d-block "
+              >
                 Register now ?
-              </a>
-              <button type="submit" className="btn-login col-4">
+              </NavLink>
+              <button type="submit" className="btn-login col-4 d-block ">
                 Login
               </button>
             </div>
@@ -77,7 +79,6 @@ const Login = () => {
       </div>
     </section>
   );
-
 };
 
 export default Login;

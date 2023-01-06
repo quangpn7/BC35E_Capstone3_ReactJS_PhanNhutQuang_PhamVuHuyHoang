@@ -3,7 +3,7 @@ section.profile {
   .profile__wrap {
     margin-top: 47px;
     .profile__title {
-      padding: 13px 400px 13px 30px;
+      padding: 13px 80% 13px 30px;
       margin-bottom: 26px;
       display: inline-block;
 
@@ -93,5 +93,77 @@ section.order {
       gap: 87px;
       justify-content: center;
     }
+  }
+}
+@include responsive("large-down") {
+  img {
+    display: block;
+    width: 30% !important;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    border-radius: 50%;
+  }
+  button.update-btn {
+    width: 50%;
+    margin-top: 20px;
+  }
+}
+
+@include responsive("medium-down") {
+  .profile__info {
+    img {
+      display: block;
+      width: 50% !important;
+      margin: 0 auto;
+      margin-bottom: 30px;
+      border-radius: 50%;
+    }
+
+    label {
+      margin: 10px 0 !important;
+      width: 100% !important;
+    }
+    input {
+      background-color: rgba(33, 33, 33, 0.08);
+      border: none;
+      padding: 14px;
+      width: 100% !important;
+    }
+  }
+  button.update-btn {
+    display: block;
+    width: 60%;
+    margin: 15px auto !important;
+  }
+  .profile__gender {
+    label {
+      display: block !important;
+      margin-bottom: 0;
+      @include styleText(18px, $fw-3, rgba(0, 0, 0, 0.6));
+    }
+    input {
+      display: inline-block;
+      margin: 0 !important;
+      height: 35px;
+      width: 35px;
+      accent-color: #af19e3;
+    }
+    .gender-male {
+      margin-right: 30px;
+    }
+  }
+}
+@include responsive("small-down") {
+  button.update-btn {
+    margin-top: 20px;
+    margin-left: 0 !important;
+    width: 100%;
+  }
+  img {
+    width: 80px !important;
+    margin-bottom: 0;
+  }
+  td {
+    vertical-align: middle !important;
   }
 }
