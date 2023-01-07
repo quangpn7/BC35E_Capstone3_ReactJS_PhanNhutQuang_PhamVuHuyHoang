@@ -1,5 +1,4 @@
 import React from "react";
-import ProductItem from "../components/ProductItem/ProductItem";
 import { useDispatch, useSelector } from "react-redux";
 import ShoesCard from "../components/shoesCard/ShoesCard";
 import {

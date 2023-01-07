@@ -8,7 +8,7 @@ import { getCookie, http, TOKEN } from "../../utils/config";
 const ShoesCard = (props) => {
   const { item, index } = props;
   const { userFav } = useSelector((state) => state.userReducer);
-  const [userFavList, setUserFavList] = useState(userFav);
+
   const dispatch = useDispatch();
   //Check fav
   const likeClick = (id) => {
