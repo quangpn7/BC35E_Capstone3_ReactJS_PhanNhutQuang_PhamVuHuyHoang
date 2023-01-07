@@ -226,7 +226,7 @@ src
         - To decide which one to rener, the app automatically calling from API (with Token) to get user's liked products. From that, when rendering the card, it will check whether that current item is liked or not to render the right one.
 ##### **The others components were assigned to Hoang Pham with unknown processing status.*
 ## 2. Redux, axios and API
-#### 1.3.1 Interceptor with axios
+#### 2.1 Interceptor with axios
   - `config.jsx`
       - Storing saving, load storage, cookie function
       - config request:
@@ -234,7 +234,7 @@ src
           - Authorization:...(Bearer)
           -...
       - Use `history` lib to navigate after doing some actions.
-#### 1.3.2 Redux
+#### 2.2 Redux
 ```
 redux
 ├── configStore.jsx
