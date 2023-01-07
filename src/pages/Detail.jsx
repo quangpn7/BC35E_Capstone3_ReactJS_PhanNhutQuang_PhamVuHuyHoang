@@ -2,7 +2,7 @@ import React from "react";
 import ShoesCard from "../components/shoesCard/ShoesCard";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+
 import { useEffect } from "react";
 import {
   getProductByIdApi,
@@ -29,10 +29,10 @@ const Detail = () => {
   return (
     <div className="container">
       <div className="row mt-5">
-        <div className="col-6 text-center mt-5">
-          <img src={productDetail?.image} alt="..." />
+        <div className="col-md-6 col-sm-12 text-center mt-5">
+          <img src={productDetail?.image} alt="..." className="w-100" />
         </div>
-        <div className="col-6">
+        <div className="col-md-6 col-sm-12">
           <div className="detail-text ">
             <h3 className="py-2">{productDetail?.name}</h3>
             <p className="py-2">{productDetail?.description}</p>

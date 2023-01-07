@@ -3,9 +3,8 @@ import { NavLink, useSearchParams } from "react-router-dom";
 import { useFormik } from "formik";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import ShoesCard from "../components/shoesCard/ShoesCard";
 const DemoUseSearchParam = () => {
-
-
   const [searchParams, setSearchParams] = useSearchParams();
   const [arrProduct, setArrProduct] = useState([]);
 
@@ -57,18 +56,11 @@ const DemoUseSearchParam = () => {
       <div className="row">
         {arrProduct.map((item, index) => {
           return (
-            <div className="col-4" key={index}>
-              <div className="card">
-                <img src={item.image} alt="" />
-              </div>
-              <div className="card-body">
-                <p>{item.name}</p>
-                <p>{item.price}</p>
-                <NavLink className={"btn btn-success"} to={`/detail/${item.id}`}>
-                  {" "}
-                  View Details
-                </NavLink>
-              </div>
+            <div
+              className="col-xl-4 col-md-6 col-12 mb-4 text-left "
+              key={index}
+            >
+              <ShoesCard item={item} />
             </div>
           );
         })}

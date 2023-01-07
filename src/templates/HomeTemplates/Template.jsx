@@ -97,29 +97,19 @@ const Template = () => {
       <section className="navigation">
         <div className="navigation__wrap">
           <ul className="nav">
-            <li className="nav-item active">
+            <li className="nav-item">
               <NavLink className="nav-link" to="/home" id="btnHome">
                 Home
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="#" id="btnMen" value="men">
-                Men
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="#" id="btnWoman" value="women">
-                Woman
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="#" id="btnKid">
-                Kid
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="#" id="btnSport">
-                Sport
+              <NavLink
+                className="nav-link"
+                to="/search"
+                id="search"
+                value="men"
+              >
+                Search
               </NavLink>
             </li>
           </ul>
